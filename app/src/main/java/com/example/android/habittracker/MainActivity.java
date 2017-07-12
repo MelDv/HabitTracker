@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    private void displayDatabaseInfo() {
+    private Cursor readData() {
         SQLiteDatabase db = helper.getReadableDatabase();
 
         String[] projection = {
@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = db.query(
                 HabitContract.HabitEntry.TABLE_NAME,
                 projection, null, null, null, null, null);
+        return cursor;
+    }
+
+    private void displayDatabaseInfo() {
+        Cursor cursor = readData();
 
         TextView displayView = (TextView) findViewById(R.id.habit);
 
